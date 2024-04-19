@@ -30,8 +30,14 @@ int main() {
     Matrix* secondMatrix = matrix_create_fill(3, 3, 4.0, 0.0, 1.0, -2.0, 1.0, 0.0, -2.0, 0.0, 1.0);
     matrix_print(secondMatrix);
 
+    Matrix* thirdMatrix = matrix_create_fill(3, 3, 5.0, 12.0, -6.0, -3.0, -12.0, 6.0, -3.0, -12.0, 8.0);
+    matrix_print(thirdMatrix);
+
     double complex* secondValues = matrix_3x3_find_eigenvalues(secondMatrix);
     printf("Eigenvalues: %f, %f, %f\n", creal(secondValues[0]), creal(secondValues[1]), creal(secondValues[2]));
+
+    double complex* thirdValues = matrix_3x3_find_eigenvalues(thirdMatrix);
+    printf("Eigenvalues: %f, %f, %f\n", creal(thirdValues[0]), creal(thirdValues[1]), creal(thirdValues[2]));
 
     return 0;
 }

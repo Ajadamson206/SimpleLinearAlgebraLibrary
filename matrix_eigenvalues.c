@@ -39,8 +39,7 @@ double complex* cubic_formula(double a, double b, double c, double d) {
 }
 */
 
-double complex *matrix_2x2_find_eigenvalues(Matrix *matrix)
-{
+double complex *matrix_2x2_find_eigenvalues(Matrix *matrix) {
     double *eigen_values = malloc(2 * sizeof(double));
 
     double discriminant = sqrt(pow((matrix->_data[0][0] + matrix->_data[1][1]), 2) - 4 * ((matrix->_data[0][0] * matrix->_data[1][1]) - (matrix->_data[0][1] * matrix->_data[1][0])));
@@ -51,12 +50,22 @@ double complex *matrix_2x2_find_eigenvalues(Matrix *matrix)
     return eigen_values;
 }
 
-double complex *matrix_3x3_find_eigenvalues(Matrix *matrix)
-{
+double complex *matrix_3x3_find_eigenvalues(Matrix *matrix) {
     double b = matrix->_data[0][0] + matrix->_data[1][1] + matrix->_data[2][2];
     printf("b: %f\n", b);
-    double c = (-matrix->_data[0][0] * matrix->_data[1][1]) - (matrix->_data[1][1] * matrix->_data[2][2]) - (matrix->_data[0][0] * matrix->_data[2][2]) + (matrix->_data[2][1] * matrix->_data[1][2]) + (matrix->_data[0][1] * matrix->_data[1][0]) + (matrix->_data[0][2] * matrix->_data[2][0]);
-    double d = (matrix->_data[0][0] * matrix->_data[1][1] * matrix->_data[2][2]) - (matrix->_data[0][0] * matrix->_data[2][1] * matrix->_data[1][2]) - (matrix->_data[0][1] * matrix->_data[1][0] * matrix->_data[2][2]) + (matrix->_data[0][1] * matrix->_data[2][0] * matrix->_data[1][2]) + (matrix->_data[0][3] * matrix->_data[1][0] * matrix->_data[2][1]) - (matrix->_data[0][2] * matrix->_data[2][0] * matrix->_data[1][1]);
+    double c =  (-matrix->_data[0][0] * matrix->_data[1][1]) - 
+                (matrix->_data[1][1] * matrix->_data[2][2]) - 
+                (matrix->_data[0][0] * matrix->_data[2][2]) + 
+                (matrix->_data[2][1] * matrix->_data[1][2]) + 
+                (matrix->_data[0][1] * matrix->_data[1][0]) + 
+                (matrix->_data[0][2] * matrix->_data[2][0]);
+
+    double d =  (matrix->_data[0][0] * matrix->_data[1][1] * matrix->_data[2][2]) - 
+                (matrix->_data[0][0] * matrix->_data[2][1] * matrix->_data[1][2]) - 
+                (matrix->_data[0][1] * matrix->_data[1][0] * matrix->_data[2][2]) + 
+                (matrix->_data[0][1] * matrix->_data[2][0] * matrix->_data[1][2]) + 
+                (matrix->_data[0][3] * matrix->_data[1][0] * matrix->_data[2][1]) - 
+                (matrix->_data[0][2] * matrix->_data[2][0] * matrix->_data[1][1]);
 
     double complex *solutions = malloc(3 * sizeof(*solutions));
 
@@ -65,8 +74,7 @@ double complex *matrix_3x3_find_eigenvalues(Matrix *matrix)
 
     printf("D1: %f, D0: %f\n", delta_one, delta_zero);
 
-    if (delta_one == 0 && delta_zero == 0)
-    {
+    if (delta_one == 0 && delta_zero == 0) {
         solutions[0] = (b / 3) + 0 * I;
         solutions[1] = (b / 3) + 0 * I;
         solutions[2] = (b / 3) + 0 * I;
@@ -75,12 +83,9 @@ double complex *matrix_3x3_find_eigenvalues(Matrix *matrix)
 
     double complex Cube;
 
-    if (delta_one < 0)
-    {
+    if (delta_one < 0) {
         Cube = cpow(((delta_one - cpow(((delta_one * delta_one) - (4 * delta_zero * delta_zero * delta_zero)), 1.0 / 2.0)) / 2), 1.0 / 3.0);
-    }
-    else
-    {
+    } else {
         Cube = cpow(((delta_one + cpow(((delta_one * delta_one) - (4 * delta_zero * delta_zero * delta_zero)), 1.0 / 2.0)) / 2), 1.0 / 3.0);
     }
 
