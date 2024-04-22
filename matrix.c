@@ -22,9 +22,7 @@ Matrix* matrix_create_fill(uint32_t n, uint32_t m, ...) {
         matrix_data[row] = malloc(m * sizeof(double));
         for(int column = 0; column < m; column++) {
             matrix_data[row][column] = va_arg(args, double);
-            printf("%f ", matrix_data[row][column]);
-        }
-        printf("\n");
+         }
     }
 
     Matrix* matrix = malloc(sizeof(*matrix));
@@ -127,15 +125,15 @@ void matrix_delete(Matrix* matrix) {
     free(matrix);
 }
 
-double matrix_get_data(Matrix* matrix, uint32_t row, uint32_t column) {
+inline double matrix_get_data(Matrix* matrix, uint32_t row, uint32_t column) {
     return matrix->_data[row][column];
 }
 
-double matrix_get_row_length(Matrix* matrix) {
+inline double matrix_get_row_length(Matrix* matrix) {
     return matrix->_n;
 }
 
-double matrix_get_column_length(Matrix* matrix) {
+inline double matrix_get_column_length(Matrix* matrix) {
     return matrix->_m;
 }
 

@@ -2,6 +2,9 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
+#include "matrix.h"
 
 typedef struct Vector {
     uint32_t _n;
@@ -35,6 +38,14 @@ Vector* vector_create_empty(uint32_t n) {
     return vector;
 }
 
+inline uint32_t vector_get_length(Vector* vector) {
+    return vector->_n;
+}
+
+inline double vector_access(Vector* vector, uint32_t index) {
+    return vector->_data[index];
+}
+
 bool vector_equals(Vector* vector_A, Vector* vector_B) {
     if(vector_A->_n != vector_B->_n)
         return false;
@@ -45,4 +56,14 @@ bool vector_equals(Vector* vector_A, Vector* vector_B) {
     }
 
     return true;
+}
+
+Matrix* vector_copy_to_matrix(Vector* vector) {
+    Matrix* matrix = malloc(sizeof(*matrix));
+    matrix->_m = 1;
+    matrix->_n = vector->_n;
+    matrix->_data = malloc(sizeof(double*));
+    memcpy(matrix->_data[0], vector->_data, vector->_n);
+    
+    return matrix;
 }
