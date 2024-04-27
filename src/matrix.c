@@ -125,18 +125,6 @@ void matrix_delete(Matrix* matrix) {
     free(matrix);
 }
 
-inline double matrix_get_data(Matrix* matrix, uint32_t row, uint32_t column) {
-    return matrix->_data[row][column];
-}
-
-inline double matrix_get_row_length(Matrix* matrix) {
-    return matrix->_n;
-}
-
-inline double matrix_get_column_length(Matrix* matrix) {
-    return matrix->_m;
-}
-
 bool matrix_equals(Matrix* matrix_A, Matrix* matrix_B) {
     if(matrix_A->_m != matrix_B->_m || matrix_A->_n != matrix_B->_n)
         return false;
