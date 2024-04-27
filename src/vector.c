@@ -67,3 +67,8 @@ Matrix* vector_copy_to_matrix(Vector* vector) {
     
     return matrix;
 }
+
+void vector_destroy(Vector* vector) {
+    free(vector->_data);
+    free(vector);
+}

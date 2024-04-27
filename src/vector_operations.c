@@ -77,7 +77,10 @@ Vector* vector_normal_vector(Vector* vector_A) {
     for(int i = 0; i < vector_A->_n; i++) {
         c += vector_A->_data[i] * vector_A->_data[i];
     }
-    
+
+    if (c == 0)
+        return NULL;
+
     return vector_scaling(vector_A, sqrt(c));
 }
 
@@ -89,6 +92,9 @@ void vector_normalize(Vector* vector_A) {
     for(int i = 0; i < vector_A->_n; i++) {
         c += vector_A->_data[i] * vector_A->_data[i];
     }
+
+    if(c == 0)
+        return;
 
     vector_scale(vector_A, sqrt(c));
 }
