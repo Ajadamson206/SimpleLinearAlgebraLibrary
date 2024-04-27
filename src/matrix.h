@@ -14,6 +14,15 @@ typedef struct Matrix {
     double** _data;
 } Matrix;
 
+/**
+ * @brief Create a new matrix and fill it with values
+ * @param n (uint32_t) The number of rows the matrix has
+ * @param m (uint32_t) The number of columns each row has
+ * @param va_args (double) The values that are going to be in the matrix
+ * The number of inputs in the parameters must equal n x m.
+ * @return Malloced Matrix* that is storing the matrix information. Relies on the
+ * user to call matrix_delete. 
+*/
 extern Matrix* matrix_create_fill(uint32_t n, uint32_t m, ...);
 extern Matrix* matrix_create_empty(uint32_t n, uint32_t m);
 extern Matrix* matrix_create_identity_matrix(uint32_t R);
