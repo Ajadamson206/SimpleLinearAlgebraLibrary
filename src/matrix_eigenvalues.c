@@ -39,14 +39,6 @@ double complex* cubic_formula(double a, double b, double c, double d) {
 }
 */
 
-/**
- * @brief A function which finds the eigenvalues of a 2x2 matrix by using the 
- * quadratic formula
- * @param matrix A matrix pointer that contains a 2x2 matrix
- * @returns NULL if the matrix is not a 2x2 Matrix
- * @returns A double complex pointer to a double complex array 
- * that contains two elements with the solutions
-*/
 double complex *matrix_2x2_find_eigenvalues(Matrix *matrix) {
     if((matrix->_m != 2) && (matrix->_n != 2))
         return NULL;
@@ -63,14 +55,6 @@ double complex *matrix_2x2_find_eigenvalues(Matrix *matrix) {
     return eigen_values;
 }
 
-/**
- * @brief A function that find the value of a 3x3 matrix by use of the cubic 
- * formula
- * @param matrix A matrix pointer that contains a 3x3 matrix
- * @returns NULL if the matrix is not 3x3
- * @returns A double complex pointer to a double complex array with 3 elements
- * each containing a different eigenvalue
-*/
 double complex *matrix_3x3_find_eigenvalues(Matrix *matrix) {
     if((matrix->_m != 3) && (matrix->_n != 3))
         return NULL;
@@ -120,4 +104,20 @@ double complex *matrix_3x3_find_eigenvalues(Matrix *matrix) {
     solutions[2] = (b + (w * w * Cube) + (delta_zero / (w * w * Cube))) / 3.0;
 
     return solutions;
+}
+
+void matrix_householder_transformation(Matrix* matrix_A, Matrix** matrix_Q, Matrix** matrix_R) {
+    if(matrix_A->_n < matrix_A->_m) {
+        *matrix_Q = NULL;
+        *matrix_R = NULL;
+        return;
+    }
+    
+    *matrix_Q = matrix_copy(matrix_A);
+    *matrix_R = matrix_create_empty(matrix_A->_n, matrix_A->_m);
+
+    for(int j = 0; j < matrix_A->_m; j++) {
+        // Find Vj
+        Vector* aj = matrix_row_to_vector(matrix_A, j);
+    }
 }

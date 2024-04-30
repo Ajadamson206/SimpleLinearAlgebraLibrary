@@ -2,6 +2,8 @@
 #include <complex.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
+
 
 Matrix* matrix_scalar_multiplication(Matrix* scalar_matrix, double scalar) {
     double** matrix_data = malloc(scalar_matrix->_n * sizeof(double*));
@@ -107,4 +109,15 @@ void matrix_row_echelon_form(Matrix* matrix) {
 
         }
     }
+}
+
+Matrix* matrix_transpose(Matrix* matrix) {
+    Matrix* transpose_matrix = matrix_create_empty(matrix->_m, matrix->_n);
+    for(int og_row = 0; og_row < matrix->_n; og_row++) {
+        for(int og_column = 0; og_column < matrix->_m; og_column++) {
+            transpose_matrix->_data[og_column][og_row] = matrix->_data[og_row][og_column];
+        }
+    }
+
+    return transpose_matrix;
 }

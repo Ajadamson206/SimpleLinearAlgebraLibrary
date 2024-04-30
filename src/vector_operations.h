@@ -76,3 +76,12 @@ extern Vector* vector_normal_vector(Vector* vector_A);
  * @param vector_B The vector that is going to be normalized
 */
 extern void vector_normalize(Vector* vector_A);
+
+/**
+ * @brief Find the transpose of a vector.
+ * @param vector (Vector*) The vector to be transposed
+ * @return A matrix pointer will be returned since the vectors are treated like rows, and
+ * the data will be placed on the column. The matrix will be malloced and will rely
+ * on the user to call matrix_delete.
+*/
+extern Matrix* vector_transpose(Vector* vector);

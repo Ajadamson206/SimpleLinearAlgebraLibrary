@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "vector.h"
+
 static int merror = 0;
 
 typedef struct Matrix {
@@ -138,4 +140,42 @@ bool matrix_equals(Matrix* matrix_A, Matrix* matrix_B) {
     }
 
     return true;
+}
+
+Matrix* matrix_copy(Matrix* matrix) {
+    Matrix* copied_matrix = matrix_create_empty(matrix->_n, matrix->_m);
+
+    for(int row = 0; row < matrix->_n; row++) {
+        for(int column = 0; column < matrix->_m; column++) {
+            copied_matrix->_data[row][column] = matrix->_data[row][column];
+        }
+    }
+
+    return copied_matrix;
+}
+
+Vector* matrix_row_to_vector(Matrix* matrix, uint32_t row) {
+    if(row >= matrix->_n)
+        return NULL;
+
+    Vector* vector = vector_create_empty(matrix->_m);
+
+    for(int column = 0; column < matrix->_m; column++) {
+        vector->_data[column] = matrix->_data[row][column];
+    }
+
+    return vector;
+}
+
+Vector* matrix_column_to_vector(Matrix* matrix, uint32_t column) {
+    if(column >= matrix->_m)
+        return NULL;
+
+    Vector* vector = vector_create_empty(matrix->_n);
+
+    for(int row = 0; row < matrix->_n; row++) {
+        vector->_data[row] = matrix->_data[column][row];
+    }
+
+    return vector;
 }

@@ -39,4 +39,12 @@ extern Matrix* matrix_subtraction(Matrix* matrix_A, Matrix* matrix_B);
 */
 extern Matrix* matrix_multiplication(Matrix* matrix_A, Matrix* matrix_B);
 
+/**
+ * @brief Find the transpose of a matrix
+ * @param matrix (Matrix*) Pointer to the matrix you are finding the transpose of
+ * @return The transposed matrix into a new malloced Matrix* variable, the Matrix* variable will rely on the user to call
+ * matrix_delete to remove the matrix.
+*/
+extern Matrix* matrix_transpose(Matrix* matrix);
+
 #endif

@@ -98,3 +98,10 @@ void vector_normalize(Vector* vector_A) {
 
     vector_scale(vector_A, sqrt(c));
 }
+
+Matrix* vector_transpose(Vector* vector) {
+    Matrix* vector_transpose = matrix_create_empty(vector->_n, 1);
+    for(int index = 0; index < vector->_n; index++) {
+        vector_transpose->_data[index][0] = vector->_data[index];
+    }
+}
