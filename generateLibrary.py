@@ -1,14 +1,16 @@
 # Open up the .h files and compress them into one giant linear algebra header file.
 from pathlib import Path
 from re import match
-from os import remove
+import os
 import subprocess
 
+scriptDir = os.path.dirname(os.path.realpath(__file__))
 
 def runMakefile():
+
     try:
         # Run make command in the specified directory
-        subprocess.run('make', shell=True, check=True)
+        subprocess.run('make', cwd=scriptDir, shell=True, check=True)
         print("Makefile executed successfully.")
 
     except subprocess.CalledProcessError as e:
@@ -18,7 +20,7 @@ def runMakefile():
 
 def main():
     # Get the names of the header files
-    directory = Path('src/')
+    directory = Path(scriptDir + '/src/')
     files = [file.name for file in directory.iterdir() if file.is_file() and file.match("*.h")]
 
     # Create a hashset to store the standard header files
@@ -28,11 +30,11 @@ def main():
     inStruct = False
 
     # Create the new header file linalg.h
-    with open('build/temp_linalg.h', "w") as tempHeaderFile:
+    with open(scriptDir + '/build/temp_linalg.h', "w") as tempHeaderFile:
         # Loop through each header file
         for file in files:
             # Open the header file
-            with open("src/" + file, 'r') as currentFile:
+            with open(scriptDir + "/src/" + file, 'r') as currentFile:
                 # Check each line individually
                 currentStruct = ""
                 for line in currentFile:
@@ -67,9 +69,9 @@ def main():
         tempHeaderFile.write("\n#endif")
     
     # Prepend the beginning header guards and the standard libraries
-    with open('build/linalg.h', "w") as newHeaderFile:
+    with open(scriptDir + '/build/linalg.h', "w") as newHeaderFile:
         # Read from the temp headerfile
-        with open('build/temp_linalg.h', 'r') as tempHeaderFile:
+        with open(scriptDir + '/build/temp_linalg.h', 'r') as tempHeaderFile:
             # Add header guards
             newHeaderFile.write("#ifndef LINALG\n")
             newHeaderFile.write("#define LINALG\n\n")
@@ -87,7 +89,7 @@ def main():
             for line in tempHeaderFile:
                 newHeaderFile.write(line)
 
-    remove("build/temp_linalg.h")
+    os.remove(scriptDir + "/build/temp_linalg.h")
     print("Successfully created headerfile")
     runMakefile()
 
