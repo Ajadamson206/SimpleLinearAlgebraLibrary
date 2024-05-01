@@ -5,9 +5,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 #include "matrix.h"
 
-typedef struct Vector {
+typedef struct vector {
     uint32_t _n;
     double* _data;
 } Vector;
@@ -37,7 +38,9 @@ extern Vector* vector_create_empty(uint32_t n);
  * @param vector (Vector*) The vector who's length is being determined
  * @return The length (uint32_t) of the vector
 */
-extern inline uint32_t vector_get_length(Vector* vector);
+inline uint32_t vector_get_length(Vector* vector) {
+    return vector->_n;
+};
 
 /**
  * @brief Access a particular element of the vector
@@ -45,7 +48,9 @@ extern inline uint32_t vector_get_length(Vector* vector);
  * @param index (uint32_t) The index of the element
  * @return The element at specified index
 */
-extern inline double vector_access(Vector* vector, uint32_t index);
+inline double vector_access(Vector* vector, uint32_t index) {
+    return vector->_data[index];
+};
 
 /**
  * @brief Compare the elements of the two vectors to see if they are equal
@@ -55,16 +60,6 @@ extern inline double vector_access(Vector* vector, uint32_t index);
  * FALSE if otherwise
 */
 extern bool vector_equals(Vector* vector_A, Vector* vector_B);
-
-/**
- * @brief Copy the given vector into a malloced n x 1 matrix. The return matrix
- * must be freed by the user by calling matrix_delete.
- * @param vector (Vector*) The vector which is going to be copied into
- * the matrix
- * @return The malloced n x 1 matrix. Note that the returned matrix must by freed by the
- * user by calling matrix_delete.
-*/
-extern Matrix* vector_copy_to_matrix(Vector* vector); 
 
 /**
  * @brief Free the given vector from memory

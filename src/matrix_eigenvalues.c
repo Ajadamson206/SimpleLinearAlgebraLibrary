@@ -3,6 +3,9 @@
 #include <complex.h>
 #include <stdio.h>
 
+#include "vector.h"
+#include "conversions.h"
+
 #define UNITYROOT (-1.0 / 2.0) + (sqrt(3) / 2.0) * I
 
 /*

@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <complex.h>
-#include "matrix.h"
-#include "matrix_base_operations.h"
-#include "matrix_eigenvalues.h"
+#include "linalg.h"
 
 
 int main() {

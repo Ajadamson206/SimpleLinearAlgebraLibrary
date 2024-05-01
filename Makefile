@@ -15,7 +15,7 @@ Tester: src/*
 	CC *.c -o test -lm
 
 Tester2:
-	gcc tests/tester2.c -o test -lm -L ./build -lLinAlg
+	gcc tests/tester.c -o test -lm -L ./build -lLinAlg
 
 Debug: src/*
 	CC *.c -o test -fsanitize=undefined -lm -g --no-pie
